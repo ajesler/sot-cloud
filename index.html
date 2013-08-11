@@ -29,6 +29,13 @@
 		<![endif]-->
 	</head>
 
+	<!-- 
+	NOTES
+
+	http://www.cs.columbia.edu/~roxana/teaching/COMS-E6998-7-Fall-2011/papers/armbrust-tr09.pdf
+	http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
+	-->
+
 	<body>
 
 		<div class="reveal">
@@ -38,9 +45,6 @@
 
 				<section>
 					<h1>The Cloud</h1>
-					<p>
-						<small>Andrew Esler</small>
-					</p>
 				</section>
 
 				<section>
@@ -60,15 +64,26 @@
 
 					<br />
 
-					<p>John McCarthy <></p>
+					<p>John McCarthy</p>
 				</section>
 
 				<section data-transition="fade">
 					<h1>1961</h1>
+					<aside class="notes">
+						The year of John McCarthy's speech.
+					</aside>
 				</section>
 
 				<section data-transition="fade">
-					<h1>29 October, 1969</h1>
+					<h2>29 October, 1969</h2>
+					<aside class="notes">
+				        The date two nodes of what would go on to become APRANET were connected. 
+				    </aside>
+				</section>
+
+				<section>
+					<h2>1997</h2>
+					<p>Term "cloud computing" first used by Professor Ramnath Chellappa</p>
 				</section>
 
 				<section>
@@ -88,7 +103,7 @@
 				</section>
 
 				<section>
-					Instant Resources!
+					<h2>Resources on demand!</h2>
 				</section>
 
 				<section>
@@ -98,14 +113,8 @@
 						<li>Compute</li>
 						<li>Storage</li>
 						<li>Network</li>
-						<li>Queueing, Caching, Databas, Management services, Monitoring?</li>
+						<li>Queueing, Caching, Database, Management services, Monitoring?</li>
 					</ul>
-				</section>
-
-				<section>
-					<h3>Cloud computing != data center</h3>
-
-					This is important. Obviously, there is a data center involved somewhere, but you the consumer do not have to think about it.
 				</section>
 
 				<section>
@@ -115,13 +124,31 @@
 						<li class="fragment">PaaS</li>
 						<li class="fragment">IaaS</li>
 					</ul>
-					<!-- 
-					Service models
+					 <aside class="notes">
+				        Service models
 
-					IaaS: Google Compute Cloud, Amazon EC2, Microsoft Azure, Rackspace Cloud, GoGrid
-					PaaS: VMWare CloudFoundry, Google App Engine, Amazon Elastic Beanstalk, Force.com, Redhat Openshift, Heroku, Cloud Services for Windows Azure
-					SaaS: Google Apps, 
-					-->
+						IaaS: Google Compute Cloud, Amazon EC2, Microsoft Azure, Rackspace Cloud, GoGrid
+						PaaS: VMWare CloudFoundry, Google App Engine, Amazon Elastic Beanstalk, Force.com, Redhat Openshift, Heroku, Cloud Services for Windows Azure
+						SaaS: Google Apps, Zendesk, Twilio
+				    </aside>
+				</section>
+
+				<section>
+					Why is cloud computing popular?
+					- Elasticity - scale to cope with variable workloads - dont have to spend money to have idle resources
+					- Removes capital costs required to start a project - eg dont have to buy hardware
+					- Saves on admin / staff / licensing costs. 
+					- Using PaaS allows focus on software, dont have to worry about underlying hardware
+				</section>
+
+				<section>
+					For a developer, it allows:
+					instant resources
+					rapid iteration and prototyping
+					scaling up and scaling out - survive the slashdot effect - can set up systems to do this automatically.
+					git push to deploy code? You will do this shortlyish.
+					automatable - automate your server set up. eg spidertracks infrastructure can be recreated in one command. Automation drives standardisation?
+					automate build, test, and deploy. continuous*
 				</section>
 
 				<section>
@@ -139,12 +166,56 @@
 					Avoid SPOF!
 
 					State bad, cluster good
+
+					dns issues - eg godaddy issue that meant lots of sites failed to resolve.
+					Have a plan! 
+					Go through all steps of a customer getting from them to you. What can break? Can you fix or mitigate?
 				</section>
 
 				<section>
-					<h3>What can you do with cloud computing?</h3>
+					Your cloud services providers is a single point of failure.
+					eg Megaupload, Lavabit.
 
-					Scalable, on demand - cope with a shifting workload
+
+					<aside class="notes">
+						Megaupload - established 2005, seized Jan 2012, allegedly dedicated to copyright infringement. Still unresolved. Paying customers lost data.
+						Lavabit - An encrypted mail service shut down by operator a few days ago because they did not want to "become complicit in crimes against the American people". Cannot legally say why.
+					</aside>
+				</section>
+
+				<section>
+					Who are the big players in the cloud space? What do they provide?
+				</section>
+				
+				<section>
+					Downsides to the cloud:
+					- Providers fail
+					- transient errors
+					- need a good monitoring system
+					- Devs may not understand system administration and leave services exposed, systems open, etc.
+					- May not fully understand software before it is deployed. Easy to get started sometimes, but not always configured for production. eg software intro tuts - more applies to IaaS
+					vendor lock in - use abstraction layers, eg fog, to avoid this problem.
+				</section>
+
+				<section>
+					Data loss? What can you do without access?
+					Reduce risk by backing up to another provider?
+				</section>
+
+				<section>
+					Privacy
+					USA Patriot act allows us govt to request data from US based companies.
+
+					PRISM - cooperation of google, microsoft, yahoo, etc in making data available to US govt.
+				</section>
+
+				<section>
+					How can you contact support?
+				</section>
+
+				<section>
+					Cloud providers will fail. Split your resources usage between data centers and providers if appropriate.
+					AWS, AppEngine, and Gmail have all had outages.
 				</section>
 
 				<section>
@@ -156,6 +227,18 @@
 				</section>
 
 				<section>
+					A lot of cloud providers have APIs. 
+					You may be able to test with an integrated API console, eg twilio
+
+					Testing against cloud providers when using webhooks require your machine is internet addressable. 
+					Solutions:
+						- localtunnel and its ilk
+						- Use ssh to pipe traffic between local machine and a machine that is already internet addressable. 
+
+					Running an application on your local machine means it is easier to debug and monitor what is happening. 
+				</section>
+
+				<section>
 					Monitoring
 					<!-- 
 					Now your cloud application is up and running, how do you keep an eye on its health?
@@ -164,188 +247,10 @@
 					Graphs / Metrics
 					Log aggregation
 					-->
-
-				</section>
-
-				<!--
-				OUTLINE
-
-				What can you do with the cloud?
-
-				What types of cloud resources are there?
-					- compute
-					- storage
-					- network
-
-				Players?
-					- Google Cloud Platform
-					- Amazon Web Services
-					- Microsoft Azure
-					- Rackspace Cloud
-
-
-				Pros
-					- On demand
-
-				Cons
-					- Puts ability to create internet connected systems in untrained hands? 
-				-->
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
-
-				<section>
-					<h2>THE END</h2>
+					<h1>DEMO TIME</h1>
 				</section>
 
 			</div>
@@ -376,8 +281,6 @@ function linkify( selector ) {
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 
