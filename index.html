@@ -30,10 +30,16 @@
 	</head>
 
 <!-- 
-NOTES
+SUMMARY
+This presentation explains cloud computing, and covers designing and using cloud services.
 
+NOTES
 http://www.cs.columbia.edu/~roxana/teaching/COMS-E6998-7-Fall-2011/papers/armbrust-tr09.pdf
 http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
+
+EXPAND
+State is bad - give concrete examples
+Privacy slide needs more info / examples
 -->
 
 	<body>
@@ -48,7 +54,7 @@ http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
 </section>
 
 <section>
-	<h3>latest tech fad?</h3>
+	<h2>latest tech fad?</h2>
 </section>
 
 <section data-transition="fade">
@@ -138,14 +144,15 @@ http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
 	<h2>Why is cloud computing popular?</h2>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h3>Agility</h3>
 	<aside class="notes">
-		Enables rapid prot
+		Enables rapid prototyping and experimentation
+		You want to benchmark a ten node cluster? Go for it. $20 an hour or less.
 	</aside>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h3>Reduces costs</h3>
 	<aside class="notes">
 		No need to purchase hardware prior to a project.
@@ -154,7 +161,7 @@ http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
 	</aside>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h3>Elasticity</h3>
 	<aside class="notes">
 		Scale to cope with variable workloads
@@ -171,110 +178,225 @@ http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
 </section>
 
 <section data-transition="fade">
-	<h3>Instant Resources</h3>
+	<h3>Instant Resources!</h3>
 </section>
 
-<section>
-	For a developer, it allows:
-	instant resources
-	rapid iteration and prototyping
-	scaling up and scaling out - survive the slashdot effect - can set up systems to do this automatically.
-	git push to deploy code? You will do this shortlyish.
-	automatable - automate your server set up. eg spidertracks infrastructure can be recreated in one command. Automation drives standardisation?
-	automate build, test, and deploy. continuous*
-	reduces cost - many providers offer a free tier. eg aws, heroku, etc. Great for students like yourselves. Ask for educational credit, eg Amazon. Some give credit for reporting bugs, doc mistakes, eg Twilio. 
-</section>
-
-<section>
-	Individual components fail!
-	<!-- 
-	When you are dealing with large scale, things will fail
-	-->
-	Expect this and design for it
-</section>
-
-<section>
-	Redundancy
-	Fault tolerance
-
-	Avoid SPOF!
-
-	State bad, cluster good
-
-	DNS issues - eg godaddy issue that meant lots of sites failed to resolve.
-	Have a plan! 
-	Go through all steps of a customer getting from them to you. What can break? Can you fix or mitigate?
-</section>
-
-<section>
-	Architecting with for the cloud
-	Design with scalability and clustering built in. Services fail, nodes are added or removed, should be negligable impact on your system.
-	Data: Partition and cache.
-	Reduce state? Makes app more compatible with clustering.
-</section>
-
-<section>
-	Your cloud services providers is a single point of failure.
-	eg Megaupload, Lavabit.
-
+<section data-transition="fade">
+	<h3>Automatable</h3>
 	<aside class="notes">
-		Megaupload - established 2005, seized Jan 2012, allegedly dedicated to copyright infringement. Still unresolved. Paying customers lost data.
-		Lavabit - An encrypted mail service shut down by operator a few days ago because they did not want to "become complicit in crimes against the American people". Cannot legally say why.
+		Have an idea you want to test? Go for it.
+		Cloud services tend to have good APIs.
+		Continuous [Build, Test, Deploy]
+		As simple as git push - you will do this in the demo.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>$ knife st env start test</h3>
+	<aside class="notes">
+		This is all it takes to start the entire test environment of 3 app servers and 3 datastore servers, as well as copy the latest backup from production, and run the latest configuration on each node.
 	</aside>
 </section>
 
 <section>
-	Who are the big players in the cloud space? What do they provide?
+	<h2>For Students</h2>
+</section>
+
+<section data-transition="fade">
+    <h3>Free usage</h3>
+    <aside class="notes">
+        Many providers (eg AWS, Heroku) have free tiers or initial credit you can experiment with.
+        Students can sometimes get educational credit.
+        Report bugs for fun and profit! Eg $20 twilio credit for reorting a doc mistake.
+    </aside>
+</section>
+
+<section data-transition="fade">
+    <h3>Unexpected features</h3>
+    <aside class="notes">
+        Often worth exploring features as there can be some interesting side benefits. For example, you can host a static website on both GitHub and S3.
+    </aside>
 </section>
 
 <section>
-	Downsides to the cloud:
-	- Providers fail - if there are issues, there is often nothing you can do on your end to fix it. Have to wait for provider. 
-	- transient errors
-	- need a good monitoring system
-	- Devs may not understand system administration and leave services exposed, systems open, etc.
-	- May not fully understand software before it is deployed. Easy to get started sometimes, but not always configured for production. eg software intro tuts - more applies to IaaS
-	vendor lock in - use abstraction layers, eg fog, to avoid this problem.
-		@ammeep "If you dont own it, abstract away the details."
+	<h2>Architecting for the Cloud</h2>
+</section>
+
+<section data-transition="fade">
+	<h3>Individual components fail!</h3>
+</section>
+
+<section data-transition="fade">
+	<h3>Expect this and design for it</h3>
+	<aside class="notes">
+		If your design is good, your response will be "Meh."
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Redundancy</h3>
+	<aside class="notes">
+		Things fail. Have spares that take over automatically.
+		You have unlimited* resources, use them. On demand even.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Fault Tolerance</h3>
+	<aside class="notes">
+		What happens when a service goes down?
+		When a node dies
+		Example is Cassandra datastore. Gossip protocol - bad node backoff. Can be re-added later with no issues. 
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>SPOF</h3>
+	<aside class="notes">
+		Think carefully about the things that can go wrong between clients and you.
+		Can turn up in some unexpected places.
+		What can break between you and the consumer? How can you mitigate the risk or deal with it when it happens?
+		eg GoDaddy DNS issue - spidertracks.com did not resolve. Website was working fine. Customer doesnt care - they know they cant access your site but they can access google - therefore internet is fine and it is a problem with you.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	Your cloud services providers is a single point of failure.
+
+	<aside class="notes">
+		If your provider fails, what are you going to do about it? Generally, nothing.
+
+		Cloud providers will fail. Split your resources usage between data centers and providers if appropriate.
+
+		* AWS, AppEngine, and Gmail have all had outages.
+
+		* Megaupload - established 2005, seized Jan 2012, allegedly dedicated to copyright infringement. Still unresolved. Paying customers lost data.
+
+		* Lavabit - An encrypted mail service shut down by operator last week, because they did not want to "become complicit in crimes against the American people". Cannot legally say why.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Scalability</h3>
+	<aside class="notes">
+		Your design needs to be scalable horizontally to take full advantage of the cloud. 
+		Add and remove resources as required without having to restart / redeploy.
+		State is bad, cluster aware are good.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>m1.xlarge</h3>
+	<p>to</p>
+	<h3>m2.4xlarge</h3>
+	<aside class="notes">
+		AWS EC2 allows scaling vertically by changing the node type. If your infrastructure is automated, this is easy!
+
+		vCPU,	ECU,	Memory (GiB),	Instance Storage (GB)
+		General purpose	 m1.xlarge	 64-bit	 
+			4	 8	 15	 	4 x 420
+		Memory optimized m2.4xlarge	 64-bit	 
+			8	 26	 68.4	2 x 840
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>State is bad!</h3>
+	<aside class="notes">
+		The next request from a client may not be serviced by the same machine. 
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Partition and Cache data</h3>
+	<aside class="notes">
+		"Cloud scale" data does not fit on one node. It might at the start, but it wont forever. Design for this. 
+		Eg cassandra. redundancy in database storage.
+	</aside>
 </section>
 
 <section>
-	Data loss? What can you do without access?
-	Reduce risk by backing up to another provider?
+	<h2>Downsides to the cloud</h2>
+	<aside class="notes">
+		
+	</aside>
+</section>
 
-	Backup and recovery strategy? 
-	How do you restore your data? test this (stage is useful at this point)
-	Ensure every node is being looked after.
+<section data-transition="fade">
+	<h3>Transient errors</h3>
+	<aside class="notes">
+		Things fail. Sometimes for no apparent reason. 
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Vendor lock in</h3>
+	<aside class="notes">
+		
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<blockquote cite="http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/">
+		&ldquo;If you dont own it, abstract away the details.&rdquo;
+	</blockquote>
+	<p><a href="http://www.twitter.com/ammeep">@ammeep</a> at <a href="http://www.codemania.co.nz">Code Mania</a> After Dark</p>
+	<aside class="notes">
+        There are libraries that will abstract away a particular cloud provider. Eg Fog, a Ruby gem. 
+        Abstraction not always easy when different feature sets are involved.
+        Interface for your system to use + provider specific implementations. Many cloud service providers provide their client jars for different languages. 
+        Example: Abstraction of messaging provider in GO. 
+    </aside>
+</section>
+
+<section data-transition="fade">
+    <h3>Configuration</a>
+    <aside class="notes">
+        Developers may end up doing operations tasks. Installing and configuring software. How do you know you are doing it right and not leaving gaping holes in your infrastructure or creating performance problems?
+    </aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Cutting Edge</h3>
+    <aside class="notes">
+        You may not have a full understanding of your dependencies before it goes live.
+
+        Be careful with cutting edge technology. You will most likely get cut at some point. What if it gets abandoned by everyone else or a competitor becomes more popular?
+
+        Chose an appropriate tool/service for the task, not the latest fad. Be able to justify your choice against similar tools/services.
+    </aside>
 </section>
 
 <section>
-	Security
+    <h2>Backups and Recovery</h2>
+    <aside class="notes">
+        Have a plan and test it regularly. How do you know all your nodes are being backed up?
+    </aside>
+</section>
 
-	Does your industry have any requirements about how data can be stored? Govt clouds, HIPAA, etc. Do you have to provide an audit trail?
-	Are you allowed to store it offshore / in an unknown place?
+<section data-transition="fade">
+    <h2>Security</h2>
+    <aside class="notes">
+        Does your industry have any requirements about how data can be stored? HIPAA, etc. Do you have to provide an audit trail?
+		Are you allowed to store it offshore / in an unknown place?
 
-	Do trust the cloud service provider to get it right? Encrypt data?
-	Security breaches not always reported? Are they under any obligation to tell you if one happens?
+		Govt clouds - dif to normal clouds how?
+
+		Do you trust the cloud service provider to get it right? Encrypt data?
+    </aside>
 </section>
 
 <section>
-	Privacy
-	USA Patriot act allows us govt to request data from US based companies.
+	<h2>Privacy</h2>
+	<aside class="notes">
+		USA Patriot act allows us govt to request data from US based companies.
 
-	PRISM - cooperation of google, microsoft, yahoo, etc in making data available to US govt.
+	PRISM - cooperation of google, microsoft, yahoo, etc in making data available to US govt. Metadata != data?
+	</aside>
 </section>
 
 <section>
-	How can you contact support?
-</section>
-
-<section>
-	Cloud providers will fail. Split your resources usage between data centers and providers if appropriate.
-	AWS, AppEngine, and Gmail have all had outages.
-</section>
-
-<section>
-	<h3>How do you test the cloud?</h3>
+	How do you test the cloud?
 
 	Test locally as much as possible.
 	Unit tests, obviously.
