@@ -40,6 +40,11 @@ http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
 EXPAND
 State is bad - give concrete examples
 Privacy slide needs more info / examples
+
+FINISH
+Twilio Request/Response examples
+
+Pictures?
 -->
 
 	<body>
@@ -172,9 +177,6 @@ Privacy slide needs more info / examples
 
 <section>
 	<h2>For developers</h2>
-	<aside class="notes">
-		
-	</aside>
 </section>
 
 <section data-transition="fade">
@@ -192,7 +194,7 @@ Privacy slide needs more info / examples
 </section>
 
 <section data-transition="fade">
-	<h3>$ knife st env start test</h3>
+	<h3>$ knife st env start -E test -r us-west-2 -z us-west-2a</h3>
 	<aside class="notes">
 		This is all it takes to start the entire test environment of 3 app servers and 3 datastore servers, as well as copy the latest backup from production, and run the latest configuration on each node.
 	</aside>
@@ -316,10 +318,33 @@ Privacy slide needs more info / examples
 </section>
 
 <section>
-	<h2>Downsides to the cloud</h2>
+	<h3>Webhooks</h3>
 	<aside class="notes">
-		
+		API = pull. Webhook = push.
+		Basically a callback URL. Many web services use them. Allow integrations between systems.
+		Provide event support.
+		Eg Twilio SMS receive - how you respond controls what Twilio does.
 	</aside>
+</section>
+
+<section data-transition="fade">
+	<h4>Request</h4>
+	<!-- http://softwaremaniacs.org/soft/highlight/en/ -->
+	<pre><code data-trim>
+
+	</code></pre>
+</section>
+
+<section data-transition="fade">
+	<h4>Response</h4>
+	<!-- http://softwaremaniacs.org/soft/highlight/en/ -->
+	<pre><code data-trim>
+
+	</code></pre>
+</section>
+
+<section>
+	<h2>Downsides to the cloud</h2>
 </section>
 
 <section data-transition="fade">
@@ -332,7 +357,8 @@ Privacy slide needs more info / examples
 <section data-transition="fade">
 	<h3>Vendor lock in</h3>
 	<aside class="notes">
-		
+		Ensure that you can extract your data from the provider.
+		Remember, cloud providers are not forever. 
 	</aside>
 </section>
 
@@ -389,18 +415,27 @@ Privacy slide needs more info / examples
 <section>
 	<h2>Privacy</h2>
 	<aside class="notes">
-		USA Patriot act allows us govt to request data from US based companies.
+	USA Patriot act allows us govt to request data from US based companies.
 
 	PRISM - cooperation of google, microsoft, yahoo, etc in making data available to US govt. Metadata != data?
 	</aside>
 </section>
 
 <section>
-	How do you test the cloud?
+	<h2>Testing in the Cloud</h2>
+	<aside class="notes">
+		Some clound services offer test credentials - authenticate but dont perform operations.
+	</aside>
+</section>
 
-	Test locally as much as possible.
-	Unit tests, obviously.
+<section data-transition="fade">
+	<h3>Test / Staging Environments</h3>
+	<aside class="notes">
+		This will make your life better. Have them.
+	</aside>
+</section>
 
+<section data-transition="fade">
 	<p class="fragment">Simian Army</p>
 	<div class="fragment">
 		<a href="https://github.com/Netflix/SimianArmy">Simian Army</a> on GitHub
@@ -422,53 +457,60 @@ Privacy slide needs more info / examples
 </section>
 
 <section>
-	A lot of cloud providers have APIs. 
-	You may be able to test with an integrated API console, eg twilio
+	<h3>Exposing Your Server</h3>
+	<aside class="notes">
+		Localtunnel
+		ssh port forwarding to internet addressable server - handy to know
 
-	Testing against cloud providers when using webhooks require your machine is internet addressable. 
-	Solutions:
-		- localtunnel and its ilk
-		- Use ssh to pipe traffic between local machine and a machine that is already internet addressable. 
+		Running an application on your local machine means it is easier to debug and monitor what is happening. 
 
-	Running an application on your local machine means it is easier to debug and monitor what is happening. 
+		Proxies - eg Fiddler, Wiretap
+	</aside>
 </section>
 
 <section>
-	Monitoring
-	 
-	Now your cloud application is up and running, how do you keep an eye on its health?
+	<h2>Monitoring</h2>
+	<aside class="notes">
+		Now your cloud application is up and running, how do you keep an eye on its health?
 
-	Lots of standard monitoring tools. Many providers also provide there own monitoring systems.
+		Many providers also provide there own monitoring systems.
 
-	Dashboards are good. Graphs / Metrics should provide an easy to read view of system health. 
-	Log aggregation - this is important. Dont leave logs sitting on the node. What happens if it bugs out and crashes, corrupting drive. You will never find out what happened. Fortunately, you can just start a new node, but its nice to know what failed. 
-	
-	Design with logging in mind. Where will logs go? How long will they be kept for?
-	How can they be accessed? Are they searchable?
-
-	Cloud means that many different machines may be involved in the handling of a request / action. It pays to be able to follow the processing through. 
-
-	Spidertracks uses log4j + graylog. Provides searching and real time monitoring of logs. Logs are also archived long term in Amazon S3. 
-
-	Dont leave this till after your application is live to figure out!
-
-	Different priorities of logging. Some entries only relevant for a short time, some relevant forever, eg audit trail of user actions. Great help to support when you can say exactly what a user did and when. 
-
-	Set up email / sms alerts. Get told as soon as something funky happens, dont wait to be told by customers. 
+		Real time alerts - catch issues before they become more serious. 
+		PagerDuty, etc.
+	</aside>
 </section>
 
 <section>
-	Diagnostics / Remote monitoring. 
+	<h3>Dashboard</h3>
+	<aside class="notes">
+		Show the health of the applciation.
+		Graphs and metrics
+	</aside>
+</section>
 
-	Probably a separate category from monitoring. 
-	JMX, custom admin dashboards. Actions on the system or individual node. 
-	How do you remote debug? Think about this before you deploy. If you have a bug you cannot reproduce locally, then sometimes access to prod / stage can be very helpful. 
+<section data-transition="fade">
+	<h2>Log Aggregation</h2>
+	<aside class="notes">
+		Cloud means that many different machines may be involved in the handling of a request / action. It pays to be able to follow the processing through. 
 
-	Script all the things! knife can be very useful for certain tasks. 
+		Design with logging in mind. What information do you need?
+
+		Having the ability to search logs is incredibly useful.
+
+		Different priorities of logging. Some entries only relevant for a short time, some relevant forever, eg audit trail of user actions. Great help to support when you can say exactly what a user did and when. 
+
+		Spidertracks uses log4j + graylog. Provides searching and real time monitoring of logs. Logs are also archived long term in Amazon S3. 
+	</aside>
 </section>
 
 <section>
-	Have a staging and/or test environment. Even if it doesnt run continuously. Having somewhere to test changes on a live system is very helpful. Automate creation/starting/stopping of test/stage.
+	<h2>Remote monitoring</h2>
+	<aside class="notes">
+		Not the same as logging.
+		Not the same as a dashboard.
+		Provides remote access to core platform management functionality.
+		JMX. Can be very useful to be able to remote debug. 
+	</aside>
 </section>
 
 <section>
