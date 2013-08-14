@@ -41,8 +41,7 @@ EXPAND
 State is bad - give concrete examples
 Privacy slide needs more info / examples
 
-FINISH
-Twilio Request/Response examples
+Resource pooling
 
 Pictures?
 -->
@@ -58,7 +57,7 @@ Pictures?
 	<h1>The Cloud</h1>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h2>latest tech fad?</h2>
 </section>
 
@@ -94,7 +93,7 @@ Pictures?
 
 <section>
 	<h2>1997</h2>
-	<p>Term "cloud computing" first used by Professor Ramnath Chellappa</p>
+	<p>Professor Ramnath Chellappa</p>
 </section>
 
 <section>
@@ -125,23 +124,22 @@ Pictures?
 		<li class="fragment">Storage</li>
 		<li class="fragment">Network</li>
 		<li class="fragment">Telephony</li>
-		<li class="fragment">Queueing, Caching, Database, etc...</li>
+		<li class="fragment">Queueing</li>
+		<li class="fragment">Caching, Database, etc...</li>
 	</ul>
 </section>
 
 <section>
-	<h3>*aaS's</h3>
+	<h3>Service Models</h3>
 	<ul>
-		<li class="fragment">SaaS</li>
-		<li class="fragment">PaaS</li>
 		<li class="fragment">IaaS</li>
+		<li class="fragment">PaaS</li>
+		<li class="fragment">SaaS</li>
 	</ul>
 	 <aside class="notes">
-        Service models
-
 		IaaS: Google Compute Cloud, Amazon EC2, Microsoft Azure, Rackspace Cloud, GoGrid
 		PaaS: VMWare CloudFoundry, Google App Engine, Amazon Elastic Beanstalk, Force.com, Redhat Openshift, Heroku, Cloud Services for Windows Azure
-		SaaS: Google Apps, Zendesk, Twilio
+		SaaS: Google Apps, Zendesk, Twilio, GitHub
     </aside>
 </section>
 
@@ -150,19 +148,21 @@ Pictures?
 </section>
 
 <section data-transition="fade">
-	<h3>Agility</h3>
-	<aside class="notes">
-		Enables rapid prototyping and experimentation
-		You want to benchmark a ten node cluster? Go for it. $20 an hour or less.
-	</aside>
-</section>
-
-<section data-transition="fade">
 	<h3>Reduces costs</h3>
 	<aside class="notes">
 		No need to purchase hardware prior to a project.
 		You don't need to know how much capacity you need up front.
 		May reduce staff, admin, and licensing costs.
+		Spot and reserve instances.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Agility</h3>
+	<aside class="notes">
+		Enables rapid prototyping and experimentation
+		You want to benchmark a ten node cluster? Go for it. $20 an hour or less.
+		Acquire resources as you need them.
 	</aside>
 </section>
 
@@ -181,15 +181,25 @@ Pictures?
 
 <section data-transition="fade">
 	<h3>Instant Resources!</h3>
+	<aside class="notes">
+		Have an idea you want to test? Go for it.
+	</aside>
 </section>
 
 <section data-transition="fade">
 	<h3>Automatable</h3>
 	<aside class="notes">
-		Have an idea you want to test? Go for it.
 		Cloud services tend to have good APIs.
-		Continuous [Build, Test, Deploy]
 		As simple as git push - you will do this in the demo.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Chef & Opscode</h3>
+	<aside class="notes">
+		Not just services which are automatable.
+		Examples of infrastructure automation tool. Not cloud only.
+		Puppet is an alternative.
 	</aside>
 </section>
 
@@ -197,6 +207,16 @@ Pictures?
 	<h3>$ knife st env start -E test -r us-west-2 -z us-west-2a</h3>
 	<aside class="notes">
 		This is all it takes to start the entire test environment of 3 app servers and 3 datastore servers, as well as copy the latest backup from production, and run the latest configuration on each node.
+	</aside>
+</section>
+
+<section data-transition="fade">
+	<h3>Vagrant</h3>
+	<aside class="notes">
+		Create a vm from a box file and a configuration.
+		Useful for building a local cluster for testing.
+
+		Integrates with puppet and chef. Can use VMWare or VirtualBox.
 	</aside>
 </section>
 
@@ -208,8 +228,8 @@ Pictures?
     <h3>Free usage</h3>
     <aside class="notes">
         Many providers (eg AWS, Heroku) have free tiers or initial credit you can experiment with.
-        Students can sometimes get educational credit.
-        Report bugs for fun and profit! Eg $20 twilio credit for reorting a doc mistake.
+        Students can sometimes get educational credit. If you are doing a project and want to try, email support and ask!
+        Report bugs for fun and profit! Eg $20 twilio credit for reporting a doc mistake.
     </aside>
 </section>
 
@@ -223,6 +243,15 @@ Pictures?
 <section>
 	<h2>Architecting for the Cloud</h2>
 </section>
+
+<section>
+	<h3>Cloud != Desktop</h3>
+	<aside class="notes">
+		Very different way of thinking.
+	</aside>
+</section>
+
+<!-- Decoupling -->
 
 <section data-transition="fade">
 	<h3>Individual components fail!</h3>
@@ -329,6 +358,16 @@ Pictures?
 
 <section data-transition="fade">
 	<h4>Http Request</h4>
+	<ul>
+		<li>SmsSid</li>
+		<li>AccountSid</li>
+		<li>From</li>
+		<li>To</li>
+		<li>Body</li>
+	</ul>
+	<aside class="notes">
+		Makes POST or GET request ot your server.
+	</aside>
 </section>
 
 <section data-transition="fade">
@@ -398,7 +437,7 @@ Pictures?
     </aside>
 </section>
 
-<section data-transition="fade">
+<section>
     <h2>Security</h2>
     <aside class="notes">
         Does your industry have any requirements about how data can be stored? HIPAA, etc. Do you have to provide an audit trail?
@@ -454,11 +493,12 @@ Pictures?
 	</notes>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h3>Exposing Your Server</h3>
 	<aside class="notes">
 		Localtunnel
 		ssh port forwarding to internet addressable server - handy to know
+		Can also use ssh to set up proxies - useful for testing also.
 
 		Running an application on your local machine means it is easier to debug and monitor what is happening. 
 
@@ -481,8 +521,8 @@ Pictures?
 <section>
 	<h3>Dashboard</h3>
 	<aside class="notes">
-		Show the health of the applciation.
-		Graphs and metrics
+		Show the health of the application.
+		Graphs and metrics - see at a glance what is going on.
 	</aside>
 </section>
 
