@@ -33,16 +33,6 @@
 SUMMARY
 This presentation explains cloud computing, and covers designing and using cloud services.
 
-NOTES
-http://www.cs.columbia.edu/~roxana/teaching/COMS-E6998-7-Fall-2011/papers/armbrust-tr09.pdf
-http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/
-
-EXPAND
-State is bad - give concrete examples
-Privacy slide needs more info / examples
-
-Resource pooling
-
 Pictures?
 -->
 
@@ -244,21 +234,23 @@ Pictures?
 	<h2>Architecting for the Cloud</h2>
 </section>
 
-<section>
+<section data-transition="fade">
 	<h3>Cloud != Desktop</h3>
 	<aside class="notes">
 		Very different way of thinking.
 	</aside>
 </section>
 
-<!-- Decoupling -->
+<section data-transition="fade">
+	<h3>Loosely coupled services</h3>
+</section>
 
 <section data-transition="fade">
 	<h3>Individual components fail!</h3>
 </section>
 
 <section data-transition="fade">
-	<h3>Expect this and design for it</h3>
+	<h3>Expect this and design for it!</h3>
 	<aside class="notes">
 		If your design is good, your response will be "Meh."
 	</aside>
@@ -276,8 +268,8 @@ Pictures?
 	<h3>Fault Tolerance</h3>
 	<aside class="notes">
 		What happens when a service goes down?
-		When a node dies
-		Example is Cassandra datastore. Gossip protocol - bad node backoff. Can be re-added later with no issues. 
+		When a node dies?
+		Example is Cassandra datastore. Gossip protocol - bad node backoff. Can be re-added later with no issues.
 	</aside>
 </section>
 
@@ -292,7 +284,7 @@ Pictures?
 </section>
 
 <section data-transition="fade">
-	Your cloud services providers is a single point of failure.
+	<h3>Your cloud provider == SPOF?</h3>
 
 	<aside class="notes">
 		If your provider fails, what are you going to do about it? Generally, nothing.
