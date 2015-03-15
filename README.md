@@ -3,7 +3,7 @@ sot-cloud
 
 Presentation for SoT 2013 on "the cloud"
 
-[Live slides](http://aj.esler.co.nz/sot-cloud).
+[Live slides](http://ajesler.github.io/sot-cloud).
 
 The demo code is available in two parts:
 
